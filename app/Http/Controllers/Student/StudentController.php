@@ -80,4 +80,53 @@ class StudentController extends Controller
     	return redirect() -> back() -> with('success', 'Student data deleted successfully');
     }
 
+     /**
+	* Edit Student Data
+	*/
+     public function edit($id){
+
+     	$edit_data = Student::findOrFail($id);
+
+    	return view('student.edit', compact('edit_data'));
+    }
+
+     /**
+	* Update Student Data
+	*/
+     public function update(Request $val, $id){
+
+     	$this -> validate($val, [
+    		'name' => 'required',
+    		'email' => 'required',
+    		'cell' => 'required',
+    	],[
+    		'name.required' 	=> 'Name Field must not be Empty',
+    		'email.required' 	=> 'Please insert your Email Address',
+    		'cell.required' 	=> 'Cell Field is required',
+    	]);
+
+    	if ($val -> hasFile('new_photo')) {
+    		$img = $val -> file('new_photo');
+    		$unique_file_name = md5(time().rand()) . '.' . $img -> getClientOriginalExtension();
+    		$img -> move(public_path('media/students/') , $unique_file_name);
+
+    		unlink('public/media/students/' . $val -> old_photo);
+    	}else{
+    		$unique_file_name = $val -> old_photo;
+    	}
+
+
+     	$edit_data = Student::findOrFail($id);
+
+     	$edit_data -> name 		= $val -> name;
+     	$edit_data -> email 	= $val -> email;
+     	$edit_data -> cell 		= $val -> cell;
+     	$edit_data -> age 		= $val -> age;
+     	$edit_data -> location 	= $val -> location;
+     	$edit_data -> photo 	= $unique_file_name;
+     	$edit_data -> update();
+
+    	return redirect() -> back() -> with('success', 'Student data updated successfully');
+    }
+
 }
