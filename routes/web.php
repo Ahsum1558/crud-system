@@ -16,12 +16,23 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('student', function(){
-	return view('student.index');
+
+Route::group(['namespace' => 'Student'], function(){
+	// All Students Route
+	Route::get('/student', 'StudentController@index');
+	Route::get('/student/create', 'StudentController@create');
 });
-Route::get('student/create', function(){
-	return view('student.create');
-});
-Route::get('student/show', function(){
-	return view('student.show');
-});
+
+
+
+
+
+// Route::get('student', function(){
+// 	return view('student.index');
+// });
+// Route::get('student/create', function(){
+// 	return view('student.create');
+// });
+// Route::get('student/show', function(){
+// 	return view('student.show');
+// });
