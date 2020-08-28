@@ -21,6 +21,7 @@ Route::group(['namespace' => 'Student'], function(){
 	// All Students Route
 	Route::get('/student', 'StudentController@index');
 	Route::get('/student/create', 'StudentController@create');
+	Route::post('/student/store', 'StudentController@store');
 });
 
 

@@ -16,32 +16,53 @@
 		<a class="btn btn-sm btn-primary" href="{{ url('/student') }}">All Students</a>
 		<div class="card shadow">
 			<div class="card-body">
-				<h2>Sign Up</h2>
-				<form action="">
+				<h2>Add New Student</h2>
+				<!-- @foreach( $errors -> all() as $err )
+				<p class="alert alert-danger">{{ $err }}<button class="close" data-dismiss="alert">&times;</button></p>
+				@endforeach -->
+				@if( $errors -> any() )
+				<p class="alert alert-danger"> {{ $errors -> first() }} <button class="close" data-dismiss="alert">&times;</button></p>
+				@endif
+
+				@if( Session::has('success') )
+				<p class="alert alert-success"> {{ Session::get('success') }} <button class="close" data-dismiss="alert">&times;</button> </p>
+				@endif
+
+
+				<form action="{{ url('/student/store') }}" method="POST" enctype="multipart/form-data">
+					@csrf
 					<div class="form-group">
 						<label for="">Name</label>
-						<input class="form-control" type="text">
+						<input name="name" class="form-control" type="text" value="{{ old('name') }}">
 					</div>
 					<div class="form-group">
 						<label for="">Email</label>
-						<input class="form-control" type="text">
+						<input name="email" class="form-control" type="text" value="{{ old('email') }}">
 					</div>
 					<div class="form-group">
 						<label for="">Cell</label>
-						<input class="form-control" type="text">
+						<input name="cell" class="form-control" type="text" value="{{ old('cell') }}">
 					</div>
 					<div class="form-group">
-						<label for="">Username</label>
-						<input class="form-control" type="text">
+						<label for="">Age</label>
+						<input name="age" class="form-control" type="text" value="{{ old('age')}}">
 					</div>
 					<div class="form-group">
-						<input class="btn btn-primary" type="submit" value="Sign Up">
+						<label for="">Location</label>
+						<input name="location" class="form-control" type="text" value="{{ old('location') }}">
+					</div>
+					<div class="form-group">
+						<label for="">Photo</label>
+						<input name="photo" class="form-control" type="file">
+					</div>
+					<div class="form-group">
+						<input class="btn btn-primary" type="submit" value="Add Student">
 					</div>
 				</form>
 			</div>
 		</div>
 	</div>
-	
+	<br>
 
 
 
