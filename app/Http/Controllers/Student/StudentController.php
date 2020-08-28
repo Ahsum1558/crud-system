@@ -13,7 +13,11 @@ class StudentController extends Controller
 	* All Students show
 	*/
     public function index(){
-    	return view('student.index');
+    	// $data = Student::all(); //as database
+    	$data = Student::latest() -> get(); // as latest
+    	return view('student.index', [
+    		'all_student' => $data
+    	]);
     }
 
     /**
@@ -53,6 +57,27 @@ class StudentController extends Controller
     		'photo' 	=> $unique_file_name,
     	]);
     	return redirect() -> back() -> with('success', 'Student added successfull');
+    }
+
+    /**
+	* Show Student Data
+	*/
+     public function show($id){
+    	// $single_student_data = Student::find($id);
+    	$single_student_data = Student::findOrFail($id);
+    	return view('student.show', compact('single_student_data'));
+    }
+
+    /**
+	* Delete Student Data
+	*/
+     public function destroy($id){
+    	$data = Student::find($id);
+    	$data -> delete();
+
+    	unlink('public/media/students/' . $data -> photo);
+
+    	return redirect() -> back() -> with('success', 'Student data deleted successfully');
     }
 
 }

@@ -16,14 +16,30 @@
 		<a class="btn btn-sm btn-primary" href="{{ url('/student') }}">All Students</a>
 		<div class="card shadow">
 			<div class="card-header">
-				Profile of - <strong>Abdullah</strong>
+				Profile of - <strong>{{ $single_student_data -> name }}</strong>
 			</div>
 			<div class="card-body">
-				<img class="shadow d-block m-auto" style="width: 200px; height: 200px; border-radius: 50%; border: 10px solid #fff;" src="{{ URL::to('public/assets/media/img/pp_photo/jhon.jpeg') }}" alt=""> <br>
+				<img class="shadow d-block m-auto" style="width: 200px; height: 200px; border-radius: 50%; border: 10px solid #fff;" src="{{ URL::to('') }}/public/media/students/{{ $single_student_data -> photo }}" alt=""> <br>
 				<table class="table">
 					<tr>
 						<td>Name</td>
-						<td>Abdullah</td>
+						<td>{{ $single_student_data -> name }}</td>
+					</tr>
+					<tr>
+						<td>Email</td>
+						<td>{{ $single_student_data -> email }}</td>
+					</tr>
+					<tr>
+						<td>Cell</td>
+						<td>{{ $single_student_data -> cell }}</td>
+					</tr>
+					<tr>
+						<td>Age</td>
+						<td>{{ $single_student_data -> age }}</td>
+					</tr>
+					<tr>
+						<td>Location</td>
+						<td>{{ $single_student_data -> location }}</td>
 					</tr>
 				</table>
 			</div>

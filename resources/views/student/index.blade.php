@@ -13,14 +13,15 @@
 	
 
 	<div class="wrap-table">
+		@include('validate')
 		<a class="btn btn-sm btn-primary" href="{{ url('student/create') }}">Add New Student</a>
 		<div class="card shadow">
 			<div class="card-body">
-				<h2>All Data</h2>
+				<h2>All Students</h2>
 				<table class="table table-striped">
 					<thead>
 						<tr>
-							<th>#</th>
+							<th>SL</th>
 							<th>Name</th>
 							<th>Email</th>
 							<th>Cell</th>
@@ -29,67 +30,20 @@
 						</tr>
 					</thead>
 					<tbody>
+						@foreach( $all_student as $student )
 						<tr>
-							<td>1</td>
-							<td>Asraful Haque</td>
-							<td>haq@gmail.com</td>
-							<td>01717700811</td>
-							<td><img src="assets/media/img/pp_photo/istockphoto-615279718-612x612.jpg" alt=""></td>
+							<td>{{ $loop -> index + 1 }}</td>
+							<td>{{ $student -> name }}</td>
+							<td>{{ $student -> email }}</td>
+							<td>{{ $student -> cell }}</td>
+							<td><img src="{{ URL::to('') }}/public/media/students/{{ $student -> photo }}" alt=""></td>
 							<td>
-								<a class="btn btn-sm btn-info" href="#">View</a>
+								<a class="btn btn-sm btn-info" href="{{ url('student/show') }}/{{ $student -> id }}">View</a>
 								<a class="btn btn-sm btn-warning" href="#">Edit</a>
-								<a class="btn btn-sm btn-danger" href="#">Delete</a>
+								<a id="delete_data" class="btn btn-sm btn-danger" href="{{ url('student/destroy') }}/{{ $student -> id }}">Delete</a>
 							</td>
-						</tr>
-						<tr>
-							<td>1</td>
-							<td>Asraful Haque</td>
-							<td>haq@gmail.com</td>
-							<td>01717700811</td>
-							<td><img src="assets/media/img/pp_photo/istockphoto-615279718-612x612.jpg" alt=""></td>
-							<td>
-								<a class="btn btn-sm btn-info" href="#">View</a>
-								<a class="btn btn-sm btn-warning" href="#">Edit</a>
-								<a class="btn btn-sm btn-danger" href="#">Delete</a>
-							</td>
-						</tr>
-						<tr>
-							<td>1</td>
-							<td>Asraful Haque</td>
-							<td>haq@gmail.com</td>
-							<td>01717700811</td>
-							<td><img src="assets/media/img/pp_photo/istockphoto-615279718-612x612.jpg" alt=""></td>
-							<td>
-								<a class="btn btn-sm btn-info" href="#">View</a>
-								<a class="btn btn-sm btn-warning" href="#">Edit</a>
-								<a class="btn btn-sm btn-danger" href="#">Delete</a>
-							</td>
-						</tr>
-						<tr>
-							<td>1</td>
-							<td>Asraful Haque</td>
-							<td>haq@gmail.com</td>
-							<td>01717700811</td>
-							<td><img src="assets/media/img/pp_photo/istockphoto-615279718-612x612.jpg" alt=""></td>
-							<td>
-								<a class="btn btn-sm btn-info" href="#">View</a>
-								<a class="btn btn-sm btn-warning" href="#">Edit</a>
-								<a class="btn btn-sm btn-danger" href="#">Delete</a>
-							</td>
-						</tr>
-						<tr>
-							<td>1</td>
-							<td>Asraful Haque</td>
-							<td>haq@gmail.com</td>
-							<td>01717700811</td>
-							<td><img src="{{ asset('public/assets/media/img/pp_photo/istockphoto-615279718-612x612.jpg') }}" alt=""></td>
-							<td>
-								<a class="btn btn-sm btn-info" href="#">View</a>
-								<a class="btn btn-sm btn-warning" href="#">Edit</a>
-								<a class="btn btn-sm btn-danger" href="#">Delete</a>
-							</td>
-						</tr>
-						
+						</tr>	
+						@endforeach
 
 					</tbody>
 				</table>
